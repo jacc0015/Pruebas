@@ -1,0 +1,14 @@
+dotnet new sln -o InmueblesCrud
+dotnet new webapi -o InmueblesCrud.Api --framework "net6.0"
+dotnet new classlib -o InmueblesCrud.BusinessLogic  --framework "net6.0"
+dotnet new classlib -o InmueblesCrud.BusinessEntities  --framework "net6.0"
+dotnet new classlib -o InmueblesCrud.DataAccess  --framework "net6.0"
+more .\InmueblesCrud.sln
+dotnet sln add (ls -r **\*.csproj)
+dotnet build
+
+--Referencias
+dotnet add .\InmueblesCrud.Api reference .\InmueblesCrud.BusinessLogic\ .\InmueblesCrud.BusinessEntities\
+dotnet add .\InmueblesCrud.BusinessLogic reference .\InmueblesCrud.DataAccess\ 
+dotnet add .\InmueblesCrud.DataAccess reference .\InmueblesCrud.BusinessEntities\ 
+dotnet build
